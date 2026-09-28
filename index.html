@@ -1,23 +1,21 @@
 <!doctype html>
 <html lang="en">
- <head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260928-05-9348092","C":{"Abril Fatface":"YACgEZbkUVE,0","Alfa Slab One":"YACgEYS9sJU,0","Anton":"YACgEcYqQ-A,0","Archivo":"YACgEZulLoA,0","Arial Narrow":"YAGyDvJ_4Ts,0","Arial Rounded MT Bold":"YAFcfoaHu-s,0","Arial":"YAGyDvJ_4Ts,0","Avenir Next":"YAFcfmNq6UY,0","Baloo 2":"YADK30bC6HQ,0","Bebas Neue":"YACgESME5ew,0","Bricolage Grotesque":"YAFyMcdwzpc,0","Broken Glyph":"YADZ-exUkv0,0","Canva Sans":"YAFdJjTk5UU,1","Caveat":"YALBs2ploWQ,0","Comic Sans MS":"YAFcfvtOAUY,1","Cormorant Garamond":"YAFdJhX-538,0","Courier New":"YAGzXiGs0_8,0","Courier Prime":"YAD1aFjegN8,0","DM Sans":"YAD1aU3sLnI,0","DM Serif Display":"YAD1aYG82rc,0","Forum":"YACgEcnnqB4,0","Fraunces":"YAFdJpU7Kkk,0","Georgia":"YAGzXkO0pEM,0","Ghost Mono":"YAHQutsX00Q,0","Hanken Grotesk":"YAFcfhwp99E,0","Helvetica Neue":"YAFcf6CtJfI,0","Helvetica":"YAFcf6CtJfI,0","IBM Plex Mono":"YAFdJkmvhGI,0","Impact":"YAFcfnjI7Vk,0","Instrument Serif":"YAHFeOnZNEk,0","Inter":"YAFdJvSyp_k,3","Iowan Old Style":"YAGNIFa8j9o,0","Jacques Francois":"YADK3zbC6RM,0","JetBrains Mono":"YAFdJksXcAk,0","Josefin Sans":"YAFdJjvw9Ps,0","Lato":"YAFdJuFCnaw,0","Libre Baskerville":"YACgEUFdPdA,0","Lobster":"YAD8SnSjSFI,0","Lora":"YACgEXvxf8Q,0","Merriweather":"YACgEXvHxxs,0","Montserrat":"YAFdtQi73Xs,0","Nunito":"YAFdJoNRMmU,1","Oleo Script":"YACgEQQ14jI,0","Oswald":"YACgEQY10lw,0","Pacifico":"YADLjORQ1u4,0","Phantom Sans":"YAFdJvgJ5TU,0","Playfair Display":"YAFdJhem5V8,1","Plus Jakarta Sans":"YAGvf3_u0_Q,0","Poppins":"YAFdJjbTu24,1","Press Start 2P":"YAFyGr-8pmQ,0","Quicksand":"YAFdJpYtCxE,1","Raleway":"YAFdJhmxbVQ,1","Roboto Slab":"YAFdJswIKAg,0","Rockwell":"YAFcfyVZnN0,0","Rye":"YACgEdQP21k,0","Segoe UI":"YAHNdRD1Klw,0","Source Sans 3":"YAG4lO1Mj10,0","Source Serif 4":"YACgEfdj394,0","Space Grotesk":"YADZ-dYEmhg,0","Space Mono":"YADW1-vpsoc,0","Times New Roman":"YAGzXW3gftg,0","Times":"YAGzXW3gftg,0","Trebuchet MS":"YAFcfrglpVA,0","UV Display":"YAEdVfSSpYo,0","UV Sans":"YAFdJvgJ5TU,0","Ubuntu":"YACgERDU--Q,0","Verdana":"YAGzXTctYtQ,0","Work Sans":"YAGXhLOKv44,0","Yellowtail":"YACgEYG4kG4,0","ui-monospace":"YAD1aFjegN8,0","ui-sans-serif":"YACkoD1yZN0,0"}}');</script><script src="/_sdk/6542d56fbfe7a3eb.telemetry_sdk.js" integrity="sha512-ECdM0nK7EkwDuOqho2qxgyRQXyBHk9hZqRKMBr+Xsu6zjeHlt+qkO2N2YRiHN7Kg4e1fEHDhjIp4bGJYVypv1g=="></script>
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Communication Channels Snake</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <style>
     :root {
       --ink: #07131d;
       --panel: #0d2330;
       --line: rgba(126, 234, 255, 0.18);
       --signal: #76edff;
-      --signal-bright: #e2fbff;
       --coral: #ff745f;
-      --muted: #9ab7c5;
     }
-
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
       min-width: 320px;
@@ -25,10 +23,9 @@
       color: #edfaff;
       background-color: var(--ink);
     }
-
     .signal-shell {
       width: 100%;
-      min-height: calc(100 * min(var(--vh, 1vh), 1vh));
+      min-height: 100vh;
       position: relative;
       overflow: hidden;
       background:
@@ -36,54 +33,31 @@
         radial-gradient(circle at 92% 94%, rgba(255, 116, 95, 0.11), transparent 25rem),
         #07131d;
     }
-
-    .signal-shell::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.32;
-      background-image:
-        linear-gradient(rgba(126, 234, 255, 0.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(126, 234, 255, 0.055) 1px, transparent 1px);
-      background-size: 32px 32px;
-      mask-image: linear-gradient(to bottom, black, transparent 85%);
-    }
-
     .app-stage {
       width: 100%;
-      position: relative;
-      z-index: 1;
       max-width: 1120px;
       margin: 0 auto;
-      padding: 32px 20px 42px;
+      padding: 32px 20px;
     }
-
     .topline {
       height: 3px;
       width: 96px;
       border-radius: 999px;
       background: linear-gradient(90deg, var(--signal), var(--coral));
-      box-shadow: 0 0 22px rgba(118, 237, 255, 0.7);
     }
-
     .panel {
       background: rgba(9, 31, 43, 0.9);
       border: 1px solid var(--line);
-      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.24);
       backdrop-filter: blur(12px);
     }
-
     .game-frame {
       position: relative;
       border: 1px solid rgba(118, 237, 255, 0.42);
       border-radius: 18px;
       overflow: hidden;
       background: #071923;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02), 0 0 34px rgba(0, 209, 255, 0.09);
       touch-action: none;
     }
-
     #game-canvas {
       display: block;
       width: 100%;
@@ -91,43 +65,25 @@
       aspect-ratio: 1 / 1;
       image-rendering: pixelated;
     }
-
-    .game-overlay {
+    .game-overlay, .question-overlay {
       position: absolute;
       inset: 0;
       display: none;
       align-items: center;
       justify-content: center;
       padding: 24px;
-      background: rgba(4, 14, 21, 0.76);
-      text-align: center;
-    }
-
-    .game-overlay.show { display: flex; }
-
-    .question-overlay {
-      position: absolute;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 22px;
-      background: rgba(4, 14, 21, 0.9);
+      background: rgba(4, 14, 21, 0.85);
       text-align: center;
       z-index: 2;
     }
-
-    .question-overlay.show { display: flex; }
-
+    .game-overlay.show, .question-overlay.show { display: flex; }
     .question-card {
       width: min(100%, 480px);
       border: 1px solid rgba(118, 237, 255, 0.35);
       border-radius: 16px;
       background: #0d2330;
       padding: 22px;
-      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
     }
-
     .question-option {
       width: 100%;
       border: 1px solid rgba(118, 237, 255, 0.25);
@@ -136,154 +92,72 @@
       color: #dffbff;
       padding: 11px 13px;
       text-align: left;
-      transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+      cursor: pointer;
     }
-
-    .question-option:hover,
-    .question-option:focus-visible {
+    .question-option:hover {
       border-color: #76edff;
       background: rgba(118, 237, 255, 0.16);
-      transform: translateY(-1px);
-      outline: none;
     }
-
     .mono { font-family: "Space Mono", monospace; }
-
-    .status-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--signal);
-      box-shadow: 0 0 0 5px rgba(118, 237, 255, 0.12), 0 0 14px var(--signal);
-      animation: pulse 1.8s ease-in-out infinite;
-    }
-
-    .channel-item {
-      border-left: 2px solid rgba(118, 237, 255, 0.7);
-      padding-left: 12px;
-    }
-
-    .restart-button {
-      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
-    }
-
-    .restart-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(118, 237, 255, 0.2);
-    }
-
-    .restart-button:focus-visible,
-    #game-canvas:focus-visible {
-      outline: 3px solid #ffffff;
-      outline-offset: 4px;
-    }
-
-    @keyframes pulse {
-      50% { opacity: 0.45; transform: scale(0.88); }
-    }
-
-    @media (min-width: 768px) {
-      .app-stage { padding: 54px 34px; }
-    }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
-  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
-  <script src="/_sdk/6c2ecc939521f244.data_sdk.js" type="text/javascript" integrity="sha512-gRx8s+XsZDN6mSIQu2sivLZysbV0WHhb5kXNUWlgVb5lCMU1foJYukyMEDPv8Tnoocb8iwqB4XdRrWc7oEGzIQ=="></script>
-  <script src="/_sdk/f7f78bb888aedc8b.editing_sdk.js" type="text/javascript" integrity="sha512-FnsIjjHYbuzZnvFce+wovjDrGOUu5OD5gu+V7whPsYYqDCayWnolRQ+eXrxs3zLkGluOVeM57qCWnB82hKGl2Q=="></script>
-  <script src="/_sdk/ddcab3e45959c817.resizing_sdk.js" type="text/javascript" integrity="sha512-VAviUKfZVzugWBSeULYjSljTX+nb84wc6Zzbx5GQaQgh6X2ISSjXi8eIiCDGdwDh10esJMY0+QFQgUy9NcrTlQ=="></script>
- </head>
- <body data-template-id="__page-root">
+</head>
+<body>
   <div class="signal-shell">
-   <div class="app-stage">
-    <header class="mb-7 md:mb-10">
-     <div class="topline mb-5"></div>
-     <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-      <div>
-       <p data-template-id="eyebrow" class="canva-text mono mb-3 text-xs uppercase tracking-[0.22em]"></p>
-       <h1 data-template-id="game-title" class="canva-text max-w-3xl text-4xl font-bold tracking-tight md:text-5xl"></h1>
-      </div>
-      <div class="flex items-center gap-3 rounded-full border border-cyan-200/15 bg-cyan-100/5 px-4 py-2"><span class="status-dot" aria-hidden="true"></span> <span data-template-id="connection-label" class="canva-text mono text-xs uppercase tracking-wider"></span>
-      </div>
-     </div>
-     <p data-template-id="game-subtitle" class="canva-text mt-4 max-w-2xl text-base leading-relaxed md:text-lg"></p>
-    </header>
-    <main aria-label="Snake game">
-     <section class="grid gap-5 lg:grid-cols-[minmax(0,1fr)_290px]">
-      <section class="panel rounded-2xl p-4 sm:p-5" aria-label="Game board">
-       <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <div>
-         <p data-template-id="score-label" class="canva-text mono text-xs uppercase tracking-[0.16em]"></p>
-         <p id="score-value" class="mono mt-1 text-3xl font-bold text-cyan-100" aria-live="polite">000</p>
-        </div>
-        <div class="text-right">
-         <p data-template-id="signal-label" class="canva-text mono text-xs uppercase tracking-[0.16em]"></p>
-         <p id="signal-value" class="mono mt-1 text-sm font-bold text-cyan-200" aria-live="polite">ACTIVE</p>
-        </div>
-       </div>
-       <div class="game-frame">
-        <canvas id="game-canvas" width="600" height="600" tabindex="0" aria-label="Communication Channels Snake game board"></canvas>
-        <div id="game-overlay" class="game-overlay" aria-live="assertive">
-         <div>
-          <p data-template-id="offline-eyebrow" class="canva-text mono text-xs uppercase tracking-[0.2em]"></p>
-          <h2 data-template-id="offline-title" class="canva-text mt-2 text-3xl font-bold"></h2>
-          <p data-template-id="offline-message" class="canva-text mt-3 max-w-sm text-sm leading-relaxed"></p>
-         </div>
-        </div>
-        <div id="question-overlay" class="question-overlay" aria-live="polite">
-         <div class="question-card">
-          <p class="mono text-xs uppercase tracking-[0.18em] text-cyan-300">Channel check</p>
-          <h2 id="question-title" class="mt-2 text-xl font-bold text-white">Choose the clearest channel</h2>
-          <p id="question-prompt" class="mt-3 text-sm leading-relaxed text-cyan-50"></p>
-          <div id="question-options" class="mt-5 grid gap-2"></div>
-         </div>
-        </div>
-       </div>
-       <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p id="live-message" class="mono text-xs text-cyan-100/70" aria-live="polite">Signal is moving. Keep the channel open.</p><button id="restart-button" data-template-id="restart-button" class="canva-button restart-button inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 font-semibold" type="button"> <i data-lucide="rotate-ccw" width="17" height="17" aria-hidden="true"></i> <span>Restart transmission</span> </button>
-       </div>
-      </section>
-      <aside class="space-y-5" aria-label="Game instructions">
-       <section data-template-id="controls-panel" class="canva-panel panel rounded-2xl p-5">
-        <div class="mb-4 flex items-center gap-2"><i data-lucide="radio" class="text-cyan-200" width="19" height="19" aria-hidden="true"></i>
-         <h2 data-template-id="controls-title" class="canva-text text-lg font-bold"></h2>
-        </div>
-        <div class="space-y-4">
-         <div class="channel-item">
-          <h3 data-template-id="keyboard-title" class="canva-text text-sm font-semibold"></h3>
-          <p data-template-id="keyboard-text" class="canva-text mt-1 text-sm leading-relaxed"></p>
-         </div>
-         <div class="channel-item border-l-[var(--coral)]">
-          <h3 data-template-id="touch-title" class="canva-text text-sm font-semibold"></h3>
-          <p data-template-id="touch-text" class="canva-text mt-1 text-sm leading-relaxed"></p>
-         </div>
-        </div>
-       </section>
-       <section data-template-id="mission-panel" class="canva-panel rounded-2xl border border-orange-200/15 bg-orange-300/[0.06] p-5">
-        <p data-template-id="mission-label" class="canva-text mono text-xs uppercase tracking-[0.17em]"></p>
-        <p data-template-id="mission-text" class="canva-text mt-2 text-sm leading-relaxed"></p>
-       </section>
-       <section data-template-id="leaderboard-panel" class="canva-panel panel rounded-2xl p-5" aria-labelledby="leaderboard-title">
-        <div class="mb-4 flex items-center justify-between gap-3">
-         <h2 data-template-id="leaderboard-title" id="leaderboard-title" class="canva-text text-lg font-bold"></h2><i data-lucide="trophy" class="text-orange-200" width="19" height="19" aria-hidden="true"></i>
-        </div>
-        <form id="score-form" class="space-y-3">
-         <div><label data-template-id="player-name-label" class="canva-text mb-1 block text-xs font-semibold uppercase tracking-wider" for="player-name"></label> <input id="player-name" class="canva-input w-full rounded-lg border border-cyan-100/15 bg-cyan-100/5 px-3 py-2 text-sm text-white placeholder:text-cyan-100/45 focus:border-cyan-200 focus:outline-none" type="text" maxlength="24" autocomplete="nickname" required>
-         </div><button data-template-id="save-score-button" class="canva-button w-full rounded-lg px-3 py-2 font-semibold" type="submit"></button>
-         <p id="score-status" class="mono min-h-4 text-xs text-cyan-100/70" aria-live="polite"></p>
-        </form>
-        <ol id="leaderboard-list" class="mt-5 space-y-2" aria-live="polite"></ol>
-       </section>
-      </aside>
-     </section>
-    </main>
-    <footer class="mt-7 border-t border-cyan-100/10 pt-5">
-     <p data-template-id="footer-text" class="canva-text mono text-xs uppercase tracking-[0.12em]"></p>
-    </footer>
-   </div>
+    <div class="app-stage">
+      <header class="mb-6">
+        <div class="topline mb-5"></div>
+        <h1 class="text-3xl font-bold tracking-tight md:text-4xl">Communication Channels Snake</h1>
+        <p class="mt-2 text-sm text-cyan-100/70">Navigate the signal snake and select the right workplace communication channel for each node you pick up.</p>
+      </header>
+      <main>
+        <section class="grid gap-5 lg:grid-cols-[minmax(0,1fr)_290px]">
+          <section class="panel rounded-2xl p-4 sm:p-5">
+            <div class="mb-4 flex justify-between items-center">
+              <div>
+                <p class="mono text-xs uppercase text-cyan-300">Score</p>
+                <p id="score-value" class="mono text-3xl font-bold text-cyan-100">000</p>
+              </div>
+              <div class="text-right">
+                <p class="mono text-xs uppercase text-cyan-300">Signal</p>
+                <p id="signal-value" class="mono text-sm font-bold text-cyan-200">ACTIVE</p>
+              </div>
+            </div>
+            <div class="game-frame">
+              <canvas id="game-canvas" width="600" height="600" tabindex="0"></canvas>
+              <div id="game-overlay" class="game-overlay">
+                <div>
+                  <h2 class="text-2xl font-bold text-coral">Signal Lost</h2>
+                  <p class="mt-2 text-sm text-cyan-100/80">Transmission interrupted. Click restart below to begin a new transmission.</p>
+                </div>
+              </div>
+              <div id="question-overlay" class="question-overlay">
+                <div class="question-card">
+                  <p class="mono text-xs uppercase text-cyan-300">Channel Check</p>
+                  <h2 class="mt-2 text-lg font-bold text-white">Select the best communication channel</h2>
+                  <p id="question-prompt" class="mt-3 text-sm text-cyan-50"></p>
+                  <div id="question-options" class="mt-4 grid gap-2"></div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4 flex items-center justify-between">
+              <p id="live-message" class="mono text-xs text-cyan-100/70">Signal moving. Use arrow keys or WASD to navigate.</p>
+              <button id="restart-button" class="bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/30 text-cyan-100 rounded-lg px-4 py-2 font-semibold text-sm transition">Restart Game</button>
+            </div>
+          </section>
+          <aside class="space-y-4">
+            <section class="panel rounded-2xl p-5">
+              <h2 class="text-lg font-bold mb-2">Controls</h2>
+              <p class="text-sm text-cyan-100/70">Use <strong>Arrow Keys</strong> or <strong>WASD</strong> to move the snake on desktop, or swipe on mobile.</p>
+            </section>
+          </aside>
+        </section>
+      </main>
+    </div>
   </div>
+
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      lucide.createIcons();
+      if (window.lucide) lucide.createIcons();
 
       const canvas = document.getElementById("game-canvas");
       const ctx = canvas.getContext("2d");
@@ -295,72 +169,24 @@
       const questionPrompt = document.getElementById("question-prompt");
       const questionOptions = document.getElementById("question-options");
       const restartButton = document.getElementById("restart-button");
-      const scoreForm = document.getElementById("score-form");
-      const playerName = document.getElementById("player-name");
-      const saveScoreButton = scoreForm.querySelector("button");
-      const scoreStatus = document.getElementById("score-status");
-      const leaderboardList = document.getElementById("leaderboard-list");
-      let leaderboardRecords = [];
-
-      function renderLeaderboard(records) {
-        leaderboardRecords = [...records].sort((a, b) => Number(b.score || 0) - Number(a.score || 0)).slice(0, 5);
-        leaderboardList.innerHTML = leaderboardRecords.length ? leaderboardRecords.map((record, index) => `<li class="flex items-center justify-between rounded-lg border border-cyan-100/10 bg-cyan-100/5 px-3 py-2 text-sm"><span><span class="mono mr-2 text-cyan-300">${index + 1}</span>${escapeHtml(record.player_name)}</span><strong class="mono text-cyan-100">${Number(record.score || 0).toString().padStart(3, "0")}</strong></li>`).join("") : `<li class="text-sm text-cyan-100/60">No scores saved yet.</li>`;
-      }
-
-      function escapeHtml(value) {
-        return String(value).replace(/[&<>'"]/g, character => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;","\"":"&quot;"}[character]));
-      }
-
-      const dataHandler = { onDataChanged(data) { renderLeaderboard(data); } };
-      window.dataSdk.init(dataHandler).then(result => {
-        if (!result.isOk) scoreStatus.textContent = "Leaderboard unavailable right now.";
-      });
-
-      scoreForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        const name = playerName.value.trim();
-        if (!name) return;
-        saveScoreButton.disabled = true;
-        scoreStatus.textContent = "Saving score…";
-        try {
-          const result = await window.dataSdk.create({ player_name: name, score, created_at: new Date().toISOString() });
-          scoreStatus.textContent = result.isOk ? "Score saved to the leaderboard." : "Could not confirm the score. Try again.";
-          if (result.isOk) playerName.value = "";
-        } finally {
-          saveScoreButton.disabled = false;
-        }
-      });
 
       const channelChecks = [
-        { prompt: "A quick clarification is needed from a colleague who is online now. Which channel fits best?", options: ["Instant message (IM)", "Email", "Phone call"], answer: 0 },
-        { prompt: "You need to share a detailed project update that people may need to reference later. Which channel fits best?", options: ["Phone call", "Email", "IM only"], answer: 1 },
-        { prompt: "A production issue needs an immediate two-way discussion. Which channel fits best?", options: ["Phone or video call", "A long email", "A delayed announcement"], answer: 0 },
-        { prompt: "Your message could sound abrupt: ‘Send this now.’ Which rewrite has the most constructive tone?", options: ["Please could you send this when you have a moment? Thanks.", "Send this now.", "Why have you not sent this yet?"], answer: 0 },
-        { prompt: "You disagree with a proposal in a team chat. Which response has the best tone?", options: ["I see the goal. Could we also consider this alternative?", "That will never work.", "No."], answer: 0 },
-        { prompt: "A sensitive performance concern needs nuance and privacy. Which channel is most appropriate?", options: ["Public group chat", "Private conversation or call", "All-company email"], answer: 1 }
+        { prompt: "A quick clarification is needed from an online colleague. Which channel fits best?", options: ["Instant message (IM)", "Email", "Phone call"], answer: 0 },
+        { prompt: "You need to share a detailed project update for future reference. Which channel fits best?", options: ["Phone call", "Email", "IM only"], answer: 1 },
+        { prompt: "A critical production issue needs immediate 2-way discussion. Which channel fits best?", options: ["Phone or video call", "A long email", "A delayed announcement"], answer: 0 }
       ];
+
       let checkIndex = 0;
       let awaitingCheck = false;
-
       const tiles = 20;
       const cell = canvas.width / tiles;
-      let snake;
-      let node;
-      let direction;
-      let nextDirection;
-      let score;
-      let gameOver;
-      let timer;
-      let touchStart = null;
+      let snake, node, direction, nextDirection, score, gameOver, timer, touchStart = null;
 
       function randomNode() {
         let candidate;
         do {
-          candidate = {
-            x: Math.floor(Math.random() * tiles),
-            y: Math.floor(Math.random() * tiles)
-          };
-        } while (snake.some(segment => segment.x === candidate.x && segment.y === candidate.y));
+          candidate = { x: Math.floor(Math.random() * tiles), y: Math.floor(Math.random() * tiles) };
+        } while (snake.some(s => s.x === candidate.x && s.y === candidate.y));
         return candidate;
       }
 
@@ -374,11 +200,10 @@
           button.className = "question-option";
           button.textContent = option;
           button.addEventListener("click", () => {
-            const correct = index === check.answer;
-            message.textContent = correct ? "Channel choice noted. Keep the conversation moving." : "Good reflection. Choose the channel that best matches the urgency and tone.";
+            message.textContent = index === check.answer ? "Correct channel choice!" : "Choice noted. Consider urgency and tone.";
             questionOverlay.classList.remove("show");
             awaitingCheck = false;
-            checkIndex += 1;
+            checkIndex++;
             timer = setInterval(tick, 118);
             canvas.focus({ preventScroll: true });
           });
@@ -390,17 +215,14 @@
 
       function startGame() {
         clearInterval(timer);
-        snake = [
-          { x: 10, y: 10 },
-          { x: 9, y: 10 },
-          { x: 8, y: 10 }
-        ];
+        snake = [{ x: 10, y: 10 }, { x: 9, y: 10 }, { x: 8, y: 10 }];
         node = { x: 15, y: 5 };
         direction = { x: 1, y: 0 };
         nextDirection = { x: 1, y: 0 };
         score = 0;
         gameOver = false;
         overlay.classList.remove("show");
+        questionOverlay.classList.remove("show");
         scoreValue.textContent = "000";
         signalValue.textContent = "ACTIVE";
         message.textContent = "Signal is moving. Keep the channel open.";
@@ -411,17 +233,10 @@
 
       function tick() {
         if (gameOver || awaitingCheck) return;
-
         direction = nextDirection;
-        const head = {
-          x: snake[0].x + direction.x,
-          y: snake[0].y + direction.y
-        };
+        const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
 
-        const hitBoundary = head.x < 0 || head.x >= tiles || head.y < 0 || head.y >= tiles;
-        const hitTrail = snake.some(segment => segment.x === head.x && segment.y === head.y);
-
-        if (hitBoundary || hitTrail) {
+        if (head.x < 0 || head.x >= tiles || head.y < 0 || head.y >= tiles || snake.some(s => s.x === head.x && s.y === head.y)) {
           endGame();
           return;
         }
@@ -431,7 +246,6 @@
         if (head.x === node.x && head.y === node.y) {
           score += 10;
           scoreValue.textContent = String(score).padStart(3, "0");
-          message.textContent = "Message node received. Choose the best workplace channel.";
           node = randomNode();
           clearInterval(timer);
           showChannelCheck();
@@ -446,125 +260,32 @@
         gameOver = true;
         clearInterval(timer);
         signalValue.textContent = "OFFLINE";
-        message.textContent = "Transmission interrupted. Restart to open a new channel.";
         overlay.classList.add("show");
-        draw();
-      }
-
-      function drawGrid() {
-        ctx.strokeStyle = "rgba(126, 234, 255, 0.09)";
-        ctx.lineWidth = 1;
-        for (let i = 0; i <= tiles; i++) {
-          const position = i * cell;
-          ctx.beginPath();
-          ctx.moveTo(position, 0);
-          ctx.lineTo(position, canvas.height);
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.moveTo(0, position);
-          ctx.lineTo(canvas.width, position);
-          ctx.stroke();
-        }
-      }
-
-      function drawNode() {
-        const x = node.x * cell + cell / 2;
-        const y = node.y * cell + cell / 2;
-        ctx.save();
-        ctx.shadowBlur = 20;
-        ctx.shadowColor = "#ff745f";
-        ctx.fillStyle = "#ff745f";
-        ctx.beginPath();
-        ctx.arc(x, y, cell * 0.27, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = "#fff1ed";
-        ctx.beginPath();
-        ctx.arc(x, y, cell * 0.1, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      }
-
-      function drawSnake() {
-        snake.forEach((segment, index) => {
-          const inset = index === 0 ? 3 : 4;
-          const x = segment.x * cell + inset;
-          const y = segment.y * cell + inset;
-          const size = cell - inset * 2;
-
-          ctx.save();
-          if (index === 0) {
-            ctx.shadowBlur = 18;
-            ctx.shadowColor = "#76edff";
-            ctx.fillStyle = "#dffbff";
-          } else {
-            ctx.fillStyle = index % 2 === 0 ? "#46cce0" : "#2ca7bd";
-          }
-          ctx.beginPath();
-          ctx.roundRect(x, y, size, size, 5);
-          ctx.fill();
-          ctx.restore();
-
-          if (index === 0) {
-            ctx.fillStyle = "#07333f";
-            const eyeOffsetX = direction.x === 0 ? cell * 0.27 : direction.x > 0 ? cell * 0.66 : cell * 0.28;
-            const eyeOffsetY = direction.y === 0 ? cell * 0.3 : direction.y > 0 ? cell * 0.66 : cell * 0.28;
-            ctx.beginPath();
-            ctx.arc(segment.x * cell + eyeOffsetX, segment.y * cell + eyeOffsetY, 2.2, 0, Math.PI * 2);
-            ctx.fill();
-            if (direction.x === 0) {
-              ctx.beginPath();
-              ctx.arc(segment.x * cell + cell * 0.67, segment.y * cell + eyeOffsetY, 2.2, 0, Math.PI * 2);
-              ctx.fill();
-            }
-            if (direction.y === 0) {
-              ctx.beginPath();
-              ctx.arc(segment.x * cell + eyeOffsetX, segment.y * cell + cell * 0.67, 2.2, 0, Math.PI * 2);
-              ctx.fill();
-            }
-          }
-        });
       }
 
       function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = "#071923";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        drawGrid();
-        drawNode();
-        drawSnake();
+
+        // Draw Node
+        ctx.fillStyle = "#ff745f";
+        ctx.beginPath();
+        ctx.arc((node.x + 0.5) * cell, (node.y + 0.5) * cell, cell * 0.3, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Draw Snake
+        snake.forEach((segment, index) => {
+          ctx.fillStyle = index === 0 ? "#dffbff" : "#46cce0";
+          ctx.fillRect(segment.x * cell + 2, segment.y * cell + 2, cell - 4, cell - 4);
+        });
       }
 
-      function setDirection(x, y) {
-        if (gameOver) return;
-        if (x === -direction.x && y === -direction.y) return;
-        nextDirection = { x, y };
-      }
-
-      document.addEventListener("keydown", (event) => {
-        const keys = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "w", "a", "s", "d", "W", "A", "S", "D"];
-        if (keys.includes(event.key)) event.preventDefault();
-
-        if (event.key === "ArrowUp" || event.key === "w" || event.key === "W") setDirection(0, -1);
-        if (event.key === "ArrowDown" || event.key === "s" || event.key === "S") setDirection(0, 1);
-        if (event.key === "ArrowLeft" || event.key === "a" || event.key === "A") setDirection(-1, 0);
-        if (event.key === "ArrowRight" || event.key === "d" || event.key === "D") setDirection(1, 0);
-      });
-
-      canvas.addEventListener("pointerdown", (event) => {
-        touchStart = { x: event.clientX, y: event.clientY };
-      });
-
-      canvas.addEventListener("pointerup", (event) => {
-        if (!touchStart) return;
-        const dx = event.clientX - touchStart.x;
-        const dy = event.clientY - touchStart.y;
-        touchStart = null;
-        if (Math.max(Math.abs(dx), Math.abs(dy)) < 20) return;
-
-        if (Math.abs(dx) > Math.abs(dy)) {
-          setDirection(dx > 0 ? 1 : -1, 0);
-        } else {
-          setDirection(0, dy > 0 ? 1 : -1);
+      document.addEventListener("keydown", (e) => {
+        const keyMap = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0], w: [0, -1], s: [0, 1], a: [-1, 0], d: [1, 0] };
+        const dir = keyMap[e.key.toLowerCase()];
+        if (dir && !(dir[0] === -direction.x && dir[1] === -direction.y)) {
+          nextDirection = { x: dir[0], y: dir[1] };
         }
       });
 
@@ -572,5 +293,5 @@
       startGame();
     });
   </script>
- </body>
+</body>
 </html>
