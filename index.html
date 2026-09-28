@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Communication Channels Snake</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js"></script>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <style>
     :root {
@@ -107,10 +106,10 @@
       <header class="mb-6">
         <div class="topline mb-5"></div>
         <h1 class="text-3xl font-bold tracking-tight md:text-4xl">Communication Channels Snake</h1>
-        <p class="mt-2 text-sm text-cyan-100/70">Navigate the signal snake and select the right workplace communication channel for each node you pick up.</p>
+        <p class="mt-2 text-sm text-cyan-100/70">Navigate using arrow keys and select the right workplace communication channel for each node you pick up.</p>
       </header>
       <main>
-        <section class="grid gap-5 lg:grid-cols-[minmax(0,1fr)_290px]">
+        <section class="grid gap-5 lg:grid-cols-[minmax(0,1fr)_320px]">
           <section class="panel rounded-2xl p-4 sm:p-5">
             <div class="mb-4 flex justify-between items-center">
               <div>
@@ -127,7 +126,7 @@
               <div id="game-overlay" class="game-overlay">
                 <div>
                   <h2 class="text-2xl font-bold text-coral">Signal Lost</h2>
-                  <p class="mt-2 text-sm text-cyan-100/80">Transmission interrupted. Click restart below to begin a new transmission.</p>
+                  <p class="mt-2 text-sm text-cyan-100/80">Transmission interrupted. Click restart below to try again.</p>
                 </div>
               </div>
               <div id="question-overlay" class="question-overlay">
@@ -140,14 +139,30 @@
               </div>
             </div>
             <div class="mt-4 flex items-center justify-between">
-              <p id="live-message" class="mono text-xs text-cyan-100/70">Signal moving. Use arrow keys or WASD to navigate.</p>
+              <p id="live-message" class="mono text-xs text-cyan-100/70">Use Arrow keys to control the signal line.</p>
               <button id="restart-button" class="bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/30 text-cyan-100 rounded-lg px-4 py-2 font-semibold text-sm transition">Restart Game</button>
             </div>
           </section>
+
+          <!-- Leaderboard Panel -->
           <aside class="space-y-4">
             <section class="panel rounded-2xl p-5">
-              <h2 class="text-lg font-bold mb-2">Controls</h2>
-              <p class="text-sm text-cyan-100/70">Use <strong>Arrow Keys</strong> or <strong>WASD</strong> to move the snake on desktop, or swipe on mobile.</p>
+              <h2 class="text-lg font-bold mb-3 text-white">Save High Score</h2>
+              <form id="score-form" class="space-y-3">
+                <input id="player-name" class="w-full rounded-lg border border-cyan-100/15 bg-cyan-100/5 px-3 py-2 text-sm text-white placeholder:text-cyan-100/45 focus:border-cyan-200 focus:outline-none" type="text" placeholder="Your Name or Call-sign" maxlength="15" required>
+                <button type="submit" class="w-full bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/30 text-cyan-100 rounded-lg py-2 font-semibold text-sm transition">Submit to Cloud</button>
+              </form>
+              <p id="score-status" class="mono text-xs text-cyan-300 mt-2 min-h-[1rem]"></p>
+            </section>
+
+            <section class="panel rounded-2xl p-5">
+              <div class="flex justify-between items-center mb-3">
+                <h2 class="text-lg font-bold text-white">Global Leaderboard</h2>
+                <button id="refresh-scores" class="mono text-xs text-cyan-300 hover:underline">Refresh</button>
+              </div>
+              <ol id="leaderboard-list" class="space-y-2">
+                <li class="text-xs text-cyan-100/50">Loading leaderboard...</li>
+              </ol>
             </section>
           </aside>
         </section>
@@ -157,7 +172,12 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      if (window.lucide) lucide.createIcons();
+      // -------------------------------------------------------------
+      // GITHUB GIST CONFIGURATION
+      // -------------------------------------------------------------
+      const GIST_ID = "6fc8c6fc512b6377250ce317312fb798";
+      const GITHUB_TOKEN = "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";
+      // -------------------------------------------------------------
 
       const canvas = document.getElementById("game-canvas");
       const ctx = canvas.getContext("2d");
@@ -170,6 +190,90 @@
       const questionOptions = document.getElementById("question-options");
       const restartButton = document.getElementById("restart-button");
 
+      const scoreForm = document.getElementById("score-form");
+      const playerNameInput = document.getElementById("player-name");
+      const scoreStatus = document.getElementById("score-status");
+      const leaderboardList = document.getElementById("leaderboard-list");
+      const refreshScoresBtn = document.getElementById("refresh-scores");
+
+      let currentScores = [];
+
+      // Fetch Leaderboard from Gist
+      async function loadGistScores() {
+        try {
+          const res = await fetch(`https://api.github.com/gists/${GIST_ID}`);
+          const data = await res.json();
+          const content = data.files["scores.json"].content;
+          currentScores = JSON.parse(content);
+          renderLeaderboard(currentScores);
+        } catch (err) {
+          console.error(err);
+          leaderboardList.innerHTML = `<li class="text-xs text-rose-400">Failed to load scores.</li>`;
+        }
+      }
+
+      // Save New High Score to Gist
+      async function saveGistScore(name, newScore) {
+        scoreStatus.textContent = "Saving score to cloud...";
+        
+        let updatedScores = [...currentScores, { name, score: newScore }];
+        updatedScores.sort((a, b) => b.score - a.score);
+        updatedScores = updatedScores.slice(0, 5); // Keep Top 5
+
+        try {
+          const response = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
+            method: "PATCH",
+            headers: {
+              "Authorization": `token ${GITHUB_TOKEN}`,
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              files: {
+                "scores.json": {
+                  content: JSON.stringify(updatedScores, null, 2)
+                }
+              }
+            })
+          });
+
+          if (response.ok) {
+            scoreStatus.textContent = "Score saved to GitHub Gist!";
+            currentScores = updatedScores;
+            renderLeaderboard(currentScores);
+            playerNameInput.value = "";
+          } else {
+            scoreStatus.textContent = "Error updating Gist.";
+          }
+        } catch (err) {
+          console.error(err);
+          scoreStatus.textContent = "Network error saving score.";
+        }
+      }
+
+      function renderLeaderboard(records) {
+        leaderboardList.innerHTML = records.length
+          ? records.map((record, index) => `
+              <li class="flex items-center justify-between rounded-lg border border-cyan-100/10 bg-cyan-100/5 px-3 py-2 text-sm">
+                <span><span class="mono mr-2 text-cyan-300">${index + 1}.</span>${escapeHtml(record.name)}</span>
+                <strong class="mono text-cyan-100">${String(record.score).padStart(3, "0")}</strong>
+              </li>
+            `).join("")
+          : `<li class="text-xs text-cyan-100/50">No scores saved yet.</li>`;
+      }
+
+      function escapeHtml(str) {
+        return String(str).replace(/[&<>'"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[c]));
+      }
+
+      scoreForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = playerNameInput.value.trim();
+        if (!name) return;
+        saveGistScore(name, score);
+      });
+
+      refreshScoresBtn.addEventListener("click", loadGistScores);
+
       const channelChecks = [
         { prompt: "A quick clarification is needed from an online colleague. Which channel fits best?", options: ["Instant message (IM)", "Email", "Phone call"], answer: 0 },
         { prompt: "You need to share a detailed project update for future reference. Which channel fits best?", options: ["Phone call", "Email", "IM only"], answer: 1 },
@@ -180,7 +284,7 @@
       let awaitingCheck = false;
       const tiles = 20;
       const cell = canvas.width / tiles;
-      let snake, node, direction, nextDirection, score, gameOver, timer, touchStart = null;
+      let snake, node, direction, nextDirection, score, gameOver, timer;
 
       function randomNode() {
         let candidate;
@@ -200,7 +304,7 @@
           button.className = "question-option";
           button.textContent = option;
           button.addEventListener("click", () => {
-            message.textContent = index === check.answer ? "Correct channel choice!" : "Choice noted. Consider urgency and tone.";
+            message.textContent = index === check.answer ? "Correct choice!" : "Choice noted.";
             questionOverlay.classList.remove("show");
             awaitingCheck = false;
             checkIndex++;
@@ -225,7 +329,7 @@
         questionOverlay.classList.remove("show");
         scoreValue.textContent = "000";
         signalValue.textContent = "ACTIVE";
-        message.textContent = "Signal is moving. Keep the channel open.";
+        message.textContent = "Signal active. Use Arrow keys to direct the snake.";
         draw();
         timer = setInterval(tick, 118);
         canvas.focus({ preventScroll: true });
@@ -281,15 +385,26 @@
         });
       }
 
+      // Strictly Arrow Keys listener
       document.addEventListener("keydown", (e) => {
-        const keyMap = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0], w: [0, -1], s: [0, 1], a: [-1, 0], d: [1, 0] };
-        const dir = keyMap[e.key.toLowerCase()];
-        if (dir && !(dir[0] === -direction.x && dir[1] === -direction.y)) {
-          nextDirection = { x: dir[0], y: dir[1] };
+        const arrowMap = {
+          ArrowUp: [0, -1],
+          ArrowDown: [0, 1],
+          ArrowLeft: [-1, 0],
+          ArrowRight: [1, 0]
+        };
+
+        if (arrowMap[e.key]) {
+          e.preventDefault();
+          const [dx, dy] = arrowMap[e.key];
+          if (!(dx === -direction.x && dy === -direction.y)) {
+            nextDirection = { x: dx, y: dy };
+          }
         }
       });
 
       restartButton.addEventListener("click", startGame);
+      loadGistScores();
       startGame();
     });
   </script>
